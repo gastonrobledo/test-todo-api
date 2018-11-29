@@ -67,7 +67,7 @@ class TodoController {
 
   async update (req, res, next) {
     try {
-      let todo = await this.repository.update (req.params.idTodo, req.body)
+      let todo = await this.repository.update (req.params.idTodo, req.body, req.user.id)
       if (todo === null) {
         return next (new APIError ('Todo Not Found', httpStatus.NOT_FOUND))
       }
@@ -125,7 +125,7 @@ class TodoController {
       if(todo !== null) {
         return res.status (200).json (todo)
       }
-      return next(new APIError('Not found', httpStatus.NOT_FOUND))
+      return next(new APIError('Todo Not found', httpStatus.NOT_FOUND))
     } catch (e) {
       return next (new APIError (e.message, httpStatus.INTERNAL_SERVER_ERROR))
     }

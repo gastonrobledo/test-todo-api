@@ -23,8 +23,8 @@ class TodoRepository {
     return await todo.save ()
   }
 
-  async update(id, data) {
-    let t = await this.getOne(id)
+  async update(id, data, userId) {
+    let t = await this.getOne(id, userId)
     if(t) {
       t = extend(t, data)
       return await t.save ()
