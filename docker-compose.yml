@@ -1,0 +1,29 @@
+version: "3"
+services:
+  api:
+    container_name: MedableAPI
+    restart: always
+    networks:
+      - api_net
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - MONGODB_URI=mongodb://mongo/medable-api
+    ports:
+      - "5000:5000"
+    links:
+      - mongo
+  mongo:
+    networks:
+      - api_net
+    container_name: Mongo
+    image: mongo
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+volumes:
+  mongo_data:
+networks:
+  api_net:

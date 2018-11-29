@@ -1,0 +1,11 @@
+{
+  "name": "Medable - API",
+  "version": "1.0.0",
+  "description": "TODO API Documentation",
+  "title": "API Documentation",
+  "order": [],
+  "template": {
+    "withCompare": true,
+    "withGenerator": true
+  }
+}
