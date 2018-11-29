@@ -91,13 +91,41 @@ class TodoController {
    * @apiSuccess {Boolean} todo.completed is the todo completed?
    * @apiError InternalServerError There was some issue on the api.
    * @apiExample Example usage
-   * curl -i -X GET -H "Authorization: Bearer [token value]" 'https://localhost:5000/api/todos'
+   * curl -i -X GET -H "Authorization: Bearer [token value]" 'https://localhost:5000/api/todos/'
    */
   async getMyTodos (req, res, next) {
 
     try {
       const todos = await this.repository.allByUser(req.user.id)
       return res.status (200).json (todos)
+    } catch (e) {
+      return next (new APIError (e.message, httpStatus.INTERNAL_SERVER_ERROR))
+    }
+  }
+
+  /**
+   * @api {get} /api/todos/:idTodo get one todo
+   * @apiName GetOneTodo
+   * @apiGroup Todos
+   * @apiVersion 1.0.0
+   *
+   * @apiSuccess {String} todo._id Id
+   * @apiSuccess {String} todo.message Content of todo
+   * @apiSuccess {String} todo.user Id of user owner of the todo
+   * @apiSuccess {Date} todo.due_date optional due date of the todo
+   * @apiSuccess {Boolean} todo.completed is the todo completed?
+   * @apiError InternalServerError There was some issue on the api.
+   * @apiExample Example usage
+   * curl -i -X GET -H "Authorization: Bearer [token value]" 'https://localhost:5000/api/todos/5bedc2dd32a9e75e052838f8'
+   */
+  async getOne (req, res, next) {
+
+    try {
+      const todo = await this.repository.getOne(req.params.idTodo, req.user.id)
+      if(todo !== null) {
+        return res.status (200).json (todo)
+      }
+      return next(new APIError('Not found', httpStatus.NOT_FOUND))
     } catch (e) {
       return next (new APIError (e.message, httpStatus.INTERNAL_SERVER_ERROR))
     }

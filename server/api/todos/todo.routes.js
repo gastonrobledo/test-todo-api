@@ -15,6 +15,7 @@ class TodoRoutes {
     this.app.patch ('/api/todos/:idTodo', tokenMiddleWare, this.TodoController.markAsCompleted.bind (this.TodoController))
     this.app.put ('/api/todos/:idTodo', tokenMiddleWare, this.TodoController.update.bind (this.TodoController))
     this.app.delete ('/api/todos/:idTodo', tokenMiddleWare, this.TodoController.remove.bind (this.TodoController))
+    this.app.get ('/api/todos/:idTodo', tokenMiddleWare, this.TodoController.getOne.bind (this.TodoController))
   }
 }
 

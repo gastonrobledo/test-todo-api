@@ -78,6 +78,24 @@ describe ('Todos', function () {
     done()
   })
 
+  it('get all todos', async (done) => {
+    const response = await request (app)
+    .get ('/api/todos')
+    .set({ Authorization: 'Bearer ' + token })
+    expect (response.statusCode).toBe (200)
+    expect(response.body.length).toBe(1)
+    done()
+  })
+
+  it('get one todo', async (done) => {
+    const response = await request (app)
+    .get ('/api/todos/' + id)
+    .set({ Authorization: 'Bearer ' + token })
+    expect (response.statusCode).toBe (200)
+    expect(response.body._id).toBe(id)
+    done()
+  })
+
   it('delete a todo', async (done) => {
     const response = await request (app)
     .del ('/api/todos/' + id)

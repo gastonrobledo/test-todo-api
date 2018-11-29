@@ -5,8 +5,12 @@ import httpStatus from 'http-status'
 
 class TodoRepository {
 
-  async getOne(id) {
-    return await TodoModel.findOne({_id: id})
+  async getOne(id, userId) {
+    let query = {_id: id}
+    if(userId) {
+      query = extend(query, {user: userId})
+    }
+    return await TodoModel.findOne(query)
   }
 
   async save(data) {
