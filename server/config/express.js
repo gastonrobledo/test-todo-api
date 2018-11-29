@@ -12,7 +12,6 @@ import { create as createDomain } from 'domain'
 import GeneralRoutes from '../routes/api.routes'
 import config from './config'
 import mongoose from 'mongoose'
-import mongooseCache from 'cachegoose'
 import bluebird from 'bluebird'
 
 module.exports = function () {
@@ -90,7 +89,6 @@ module.exports = function () {
     useMongoClient: true
   })
   mongoose.set ('debug', !!process.env.DEBUG_DB)
-  mongooseCache (mongoose, config.redis)
 
   return spdy.createServer(options, app)
 }
