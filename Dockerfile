@@ -8,4 +8,4 @@ COPY . .
 
 EXPOSE 5000
 
-CMD ["npm", "start-nossl"]
+CMD ["npm", "run", "start-nossl"]
