@@ -4,10 +4,8 @@ services:
     container_name: MedableAPI
     restart: always
     networks:
-      - api_net
-    build:
-      context: .
-      dockerfile: Dockerfile
+      - api-net
+    image: docker.io/gastonrobledo/test-todo-api:latest
     environment:
       - MONGODB_URI=mongodb://mongo/medable-api
     ports:
@@ -16,14 +14,14 @@ services:
       - mongo
   mongo:
     networks:
-      - api_net
+      - api-net
     container_name: Mongo
     image: mongo
     volumes:
-      - mongo_data:/data/db
+      - mongo-data:/data/db
     ports:
       - "27017:27017"
 volumes:
-  mongo_data:
+  mongo-data:
 networks:
-  api_net:
+  api-net:
