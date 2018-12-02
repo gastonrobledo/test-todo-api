@@ -1,14 +1,16 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
+apiVersion: v1
+kind: Service
 metadata:
-  name: ingress-access
-  annotations:
-    ingress.kubernetes.io/rewrite-target: /
+  labels:
+    io.kompose.service: api
+  name: web
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        backend:
-          serviceName: api
-          servicePort: http
+  ports:
+  - name: http
+    port: 80
+    targetPort: 5000
+  selector:
+    io.kompose.service: api
+  type: LoadBalancer
+status:
+  loadBalancer: {}
