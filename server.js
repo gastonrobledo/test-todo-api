@@ -36,10 +36,11 @@ if (cluster.isMaster) {
 } else {
 
   // Init the express application
-  const server = require ('./server/config/express') ()
+  const exp = require ('./server/config/express') ()
+  const server = exp.server
 
   server.listen (config.port, function () {
-    console.log('Register route:', server)
+    console.log('Register route:', exp.app)
     console.log ('server started on ' + config.port + ' port')
   })
 
