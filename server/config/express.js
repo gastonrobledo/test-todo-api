@@ -67,6 +67,9 @@ module.exports = function () {
   const routes = new GeneralRoutes(app)
   routes.createRoutes()
 
+
+  console.log('APP', app)
+
   let options = {}
   if(process.env.NO_SSL === 'true'){
     options = {
