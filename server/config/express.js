@@ -62,7 +62,6 @@ module.exports = function () {
     let routeClass = require(path.resolve(routePath)).default
     const r = new routeClass(app)
     r.createRoutes()
-    console.log('Register route:', routeClass, routePath)
   });
 
   const routes = new GeneralRoutes(app)
