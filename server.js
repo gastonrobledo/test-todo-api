@@ -4,10 +4,10 @@
  * Module dependencies.
  */
 import config from './server/config/config'
-import cluster from 'cluster'
+// import cluster from 'cluster'
 
 // Start server.
-const numCPUs = Math.ceil (require ('os').cpus ().length / 2)
+/*const numCPUs = Math.ceil (require ('os').cpus ().length / 2)
 
 if (cluster.isMaster) {
   let workers = []
@@ -33,7 +33,7 @@ if (cluster.isMaster) {
   for (let i = 0; i < numCPUs; i++) {
     spawn (i)
   }
-} else {
+} else { */
 
   // Init the express application
   const exp = require ('./server/config/express') ()
@@ -68,6 +68,6 @@ if (cluster.isMaster) {
   })
 
   module.exports = server
-}
+///}
 
 
