@@ -4,7 +4,6 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import helmet from 'helmet'
 import fs from 'fs'
-import path from 'path'
 import spdy from 'spdy'
 import responseTime from 'response-time'
 import methodOverride from 'method-override'
@@ -55,19 +54,8 @@ module.exports = function () {
     return next()
   })
 
-
-
-  // Load services routes
-  config.getGlobbedFiles('../api/**/*.routes.js').forEach(async (routePath) => {
-    let routeClass = require(path.resolve(routePath)).default
-    const r = new routeClass(app)
-    r.createRoutes()
-  });
-
   const routes = new GeneralRoutes(app)
   routes.createRoutes()
-
-  console.log(app)
 
 
   let options = {}
