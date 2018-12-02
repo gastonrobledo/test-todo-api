@@ -4,10 +4,10 @@
  * Module dependencies.
  */
 import config from './server/config/config'
-// import cluster from 'cluster'
+import cluster from 'cluster'
 
 // Start server.
-/*const numCPUs = Math.ceil (require ('os').cpus ().length / 2)
+const numCPUs = Math.ceil (require ('os').cpus ().length / 2)
 
 if (cluster.isMaster) {
   let workers = []
@@ -33,41 +33,16 @@ if (cluster.isMaster) {
   for (let i = 0; i < numCPUs; i++) {
     spawn (i)
   }
-} else { */
+} else {
 
   // Init the express application
-  const exp = require ('./server/config/express') ()
-  const server = exp.server
-
-
-
-
-
+  const server = require ('./server/config/express') ()
   server.listen (config.port, function () {
+
     console.log ('server started on ' + config.port + ' port')
-
-    var route, routes = [];
-    exp.app._router.stack.forEach(function(middleware){
-      if(middleware.route){ // routes registered directly on the app
-        routes.push(middleware.route);
-      } else if(middleware.name === 'router'){ // router middleware
-        middleware.handle.stack.forEach(function(handler){
-          route = handler.route;
-          route && routes.push(route);
-        });
-      }
-    });
-
-    routes.forEach(function(temp){
-      var methods = "";
-      for(var method in temp.methods){
-        methods += method + ", ";
-      }
-      console.log(temp.path + ": " + methods);
-    });
   })
 
   module.exports = server
-///}
+}
 
 

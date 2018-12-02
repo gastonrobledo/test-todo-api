@@ -67,6 +67,8 @@ module.exports = function () {
   const routes = new GeneralRoutes(app)
   routes.createRoutes()
 
+  console.log(app)
+
 
   let options = {}
   if(process.env.NO_SSL === 'true'){
@@ -91,5 +93,5 @@ module.exports = function () {
   })
   mongoose.set ('debug', !!process.env.DEBUG_DB)
 
-  return {server: spdy.createServer(options, app), app}
+  return spdy.createServer(options, app)
 }
