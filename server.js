@@ -39,29 +39,32 @@ if (cluster.isMaster) {
   const exp = require ('./server/config/express') ()
   const server = exp.server
 
-  var route, routes = [];
 
-  exp.app._router.stack.forEach(function(middleware){
-    if(middleware.route){ // routes registered directly on the app
-      routes.push(middleware.route);
-    } else if(middleware.name === 'router'){ // router middleware
-      middleware.handle.stack.forEach(function(handler){
-        route = handler.route;
-        route && routes.push(route);
-      });
-    }
-  });
 
-  routes.forEach(function(temp){
-    var methods = "";
-    for(var method in temp.methods){
-      methods += method + ", ";
-    }
-    console.log(temp.path + ": " + methods);
-  });
+
 
   server.listen (config.port, function () {
     console.log ('server started on ' + config.port + ' port')
+
+    var route, routes = [];
+    exp.app._router.stack.forEach(function(middleware){
+      if(middleware.route){ // routes registered directly on the app
+        routes.push(middleware.route);
+      } else if(middleware.name === 'router'){ // router middleware
+        middleware.handle.stack.forEach(function(handler){
+          route = handler.route;
+          route && routes.push(route);
+        });
+      }
+    });
+
+    routes.forEach(function(temp){
+      var methods = "";
+      for(var method in temp.methods){
+        methods += method + ", ";
+      }
+      console.log(temp.path + ": " + methods);
+    });
   })
 
   module.exports = server
