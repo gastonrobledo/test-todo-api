@@ -21,7 +21,7 @@ spec:
       - env:
         - name: MONGODB_URI
           value: mongodb://mongo/medable-api
-        image: docker.io/gastonrobledo/test-todo-api:v2
+        image: gcr.io/utopian-genius-111023/github.com/gastonrobledo/test-todo-api:v2
         name: medableapi
         ports:
         - containerPort: 5000
