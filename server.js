@@ -40,7 +40,7 @@ if (cluster.isMaster) {
   const server = exp.server
 
   server.listen (config.port, function () {
-    console.log('Register route:', exp.app)
+    console.log('Register route:', JSON.stringify(exp.app._router))
     console.log ('server started on ' + config.port + ' port')
   })
 
