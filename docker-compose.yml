@@ -5,7 +5,7 @@ services:
     restart: always
     networks:
       - api-net
-    image: gcr.io/utopian-genius-111023/github.com/gastonrobledo/test-todo-api:33723f3
+    image: gcr.io/utopian-genius-111023/github.com/gastonrobledo/test-todo-api:fe1e4e1
     environment:
       - MONGODB_URI=mongodb://mongo/medable-api
     ports:
